@@ -1,38 +1,56 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
+class MyTest extends StatefulWidget {
+  const MyTest({super.key});
+
+  @override
+  State<MyTest> createState() => _MyTestState();
 }
 
-class MyApp extends StatelessWidget {
+class _MyTestState extends State<MyTest> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: MyHomePage());
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2, // Number of tabs
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("TabBar Example"),
-          centerTitle: true,
-          bottom: TabBar(
-            indicatorColor: Colors.blue, // Line under the selected tab
-            indicatorWeight: 3.0, // Thickness of the indicator line
-            tabs: [
-              Tab(icon: Icon(Icons.home), text: "Home"),
-              Tab(icon: Icon(Icons.settings), text: "Settings"),
-            ],
-          ),
-        ),
-        body: TabBarView(
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("Hello"),
+        backgroundColor: Colors.blue,
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Center(child: Text("Home Screen")),
-            Center(child: Text("Settings Screen")),
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Password',
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                  borderSide: BorderSide(color: Colors.green, width: 3),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                  borderSide: BorderSide(color: Colors.green, width: 3),
+                ),
+                prefixIcon: Icon(Icons.lock_outline),
+                suffixIcon: IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.visibility_off),
+                ),
+              ),
+              keyboardType: TextInputType.text,
+              textInputAction: TextInputAction.next,
+              obscureText: true,
+            ),
+            SizedBox(height: 16.0),
+            TextFormField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Description",
+              ),
+              maxLines: 3,
+              keyboardType: TextInputType.multiline,
+            ),
           ],
         ),
       ),

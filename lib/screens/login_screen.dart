@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,10 +13,7 @@ class LoginScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 80),
-            Image.asset(
-              'assets/images/logo.png',
-              height: 179,
-            ),
+            Image.asset('assets/images/logo.png', height: 179),
             SizedBox(height: 20),
             Text(
               'Welcome ICCKH',
@@ -69,16 +68,16 @@ class LoginScreen extends StatelessWidget {
                 onPressed: () {
                   // You can add login logic here
                 },
-                child: Text(
-                  'Login',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFF16ACE4),
                   padding: EdgeInsets.symmetric(vertical: 10),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(13.5),
                   ),
+                ),
+                child: Text(
+                  'Login',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ),
             ),

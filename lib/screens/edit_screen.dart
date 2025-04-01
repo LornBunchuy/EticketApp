@@ -156,7 +156,7 @@ class _EditPageState extends State<EditPage> {
               ],
               SizedBox(height: 16.0),
               Center(
-                child: Container(
+                child: SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(

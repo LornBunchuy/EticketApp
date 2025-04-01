@@ -3,7 +3,6 @@ import 'package:eticket/screens/home_screen.dart';
 import 'package:eticket/screens/ticket_screen.dart';
 import 'package:eticket/screens/task_screen.dart';
 import 'package:eticket/screens/help_screen.dart';
-import 'package:eticket/screens/add_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
