@@ -37,13 +37,22 @@ class _MainScreenState extends State<MainScreen> {
         ), // Color for the selected item
         unselectedItemColor: Colors.grey,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.confirmation_number),
+            icon: Icon(Icons.home_outlined),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.telegram_sharp),
             label: 'Ticket',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.task), label: 'Task'),
-          BottomNavigationBarItem(icon: Icon(Icons.help), label: 'Help'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.verified_outlined),
+            label: 'Approval',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.help_outline),
+            label: 'Help',
+          ),
         ],
         type: BottomNavigationBarType.fixed,
       ),

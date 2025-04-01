@@ -1,7 +1,17 @@
+import 'package:eticket/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  // Controllers for TextFields to capture input
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +23,7 @@ class LoginScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 80),
-            Image.asset('assets/images/logo.png', height: 179),
+            Image.asset('assets/images/logo_icckh.png', height: 179),
             SizedBox(height: 20),
             Text(
               'Welcome ICCKH',
@@ -24,70 +34,89 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 50),
-            TextField(
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.person, color: Color(0xFF16ACE4)),
-                labelText: 'User Id',
-                labelStyle: TextStyle(color: Color(0xFF16ACE4)),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF16ACE4)),
-                  borderRadius: BorderRadius.all(Radius.circular(13.5)),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF16ACE4)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF16ACE4)),
-                  borderRadius: BorderRadius.all(Radius.circular(13.5)),
-                ),
-              ),
+            // Reusable TextField widget
+            _buildTextField(
+              label: 'UserName',
+              icon: Icons.person,
+              controller: _usernameController,
             ),
             SizedBox(height: 20),
-            TextField(
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.lock, color: Color(0xFF16ACE4)),
-                labelText: 'Password',
-                labelStyle: TextStyle(color: Color(0xFF16ACE4)),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF16ACE4)),
-                  borderRadius: BorderRadius.all(Radius.circular(13.5)),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF16ACE4)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF16ACE4)),
-                  borderRadius: BorderRadius.all(Radius.circular(13.5)),
-                ),
-              ),
+            _buildTextField(
+              label: 'Password',
+              icon: Icons.lock,
+              controller: _passwordController,
+              isPassword: true,
             ),
             SizedBox(height: 30),
+            // Login Button
             SizedBox(
               width: double.infinity, // Button width matches TextField width
-              child: ElevatedButton(
-                onPressed: () {
-                  // You can add login logic here
+              child: InkWell(
+                onTap: () {
+                  // Handle login logic
+                  String username = _usernameController.text;
+                  String password = _passwordController.text;
+                  print("Username: $username, Password: $password");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MainScreen()),
+                  );
+                  // You can validate and proceed with authentication here.
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF16ACE4),
+                borderRadius: BorderRadius.circular(
+                  13.5,
+                ), // Ensures ripple effect follows shape
+                child: Container(
                   padding: EdgeInsets.symmetric(vertical: 10),
-                  shape: RoundedRectangleBorder(
+                  decoration: BoxDecoration(
+                    color: Color(0xFF16ACE4),
                     borderRadius: BorderRadius.circular(13.5),
                   ),
-                ),
-                child: Text(
-                  'Login',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Login',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
                 ),
               ),
             ),
             Spacer(),
+            // Footer Text
             Text(
               'Developed by: ICCKH\nSAP Business One Cambodia',
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.grey),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  // Reusable TextField Method
+  Widget _buildTextField({
+    required String label,
+    required IconData icon,
+    required TextEditingController controller,
+    bool isPassword = false,
+  }) {
+    return TextField(
+      controller: controller,
+      obscureText: isPassword,
+      decoration: InputDecoration(
+        prefixIcon: Icon(icon, color: Color(0xFF16ACE4)),
+        labelText: label,
+        labelStyle: TextStyle(color: Color(0xFF16ACE4)),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color(0xFF16ACE4)),
+          borderRadius: BorderRadius.all(Radius.circular(13.5)),
+        ),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: Color(0xFF16ACE4)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color(0xFF16ACE4)),
+          borderRadius: BorderRadius.all(Radius.circular(13.5)),
         ),
       ),
     );

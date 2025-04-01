@@ -1,3 +1,5 @@
+import 'package:eticket/screens/add_screen.dart';
+import 'package:eticket/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -32,10 +34,23 @@ class HomeScreen extends StatelessWidget {
           child: Image.asset('assets/images/logo_icckh.png', height: 50),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.notifications)),
+          IconButton(
+            onPressed: () {
+              _showNotificationDialog(context);
+            },
+            icon: const Icon(Icons.notifications),
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
-            child: IconButton(onPressed: () {}, icon: const Icon(Icons.person)),
+            child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfileScreen()),
+                );
+              },
+              icon: const Icon(Icons.person),
+            ),
           ),
         ],
 
@@ -63,6 +78,64 @@ class HomeScreen extends StatelessWidget {
         // ),
       ), // Set your desired background color here
       body: const Center(child: Text('Hello Help Content')),
+    );
+  }
+
+  void _showNotificationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Notifications"),
+          content: Container(
+            constraints: BoxConstraints(maxHeight: 400),
+            width: double.maxFinite,
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                _buildNotificationItem(
+                  "New Message",
+                  "You have a new message from John",
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddPage()),
+                    );
+                  },
+                ),
+                _buildNotificationItem(
+                  "Meeting Reminder",
+                  "Don't forget the team meeting at 3 PM",
+                  onTap: () {},
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("Close"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildNotificationItem(
+    String title,
+    String subtitle, {
+    required VoidCallback onTap,
+  }) {
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundImage: AssetImage('assets/images/profile.png'),
+      ),
+      title: Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
+      subtitle: Text(subtitle),
+      onTap: onTap,
     );
   }
 }
